@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="advanceNetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="DeptNo" Type="Int32" />
+    <NavigationProperty Name="Department" Relationship="advanceNetModel.FK_Students_Departments" FromRole="Student" ToRole="Department" />
+    <NavigationProperty Name="DeptCourses" Relationship="advanceNetModel.FK_DeptCourse_Students" FromRole="Student" ToRole="DeptCourse" />
+  </EntityType>
+  <EntityContainer Name="advanceNetEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="Courses" EntityType="advanceNetModel.Cours" />
+    <EntitySet Name="Departments" EntityType="advanceNetModel.Department" />
+    <EntitySet Name="DeptCourses" EntityType="advanceNetModel.DeptCourse" />
+    <AssociationSet Name="FK_Courses_Departments" Association="advanceNetModel.FK_Courses_Departments">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Cours" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeptCourse_DeptCourse" Association="advanceNetModel.FK_DeptCourse_DeptCourse">
+      <End Role="Cours" EntitySet="Courses" />
+      <End Role="DeptCourse" EntitySet="DeptCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Departments_Departments" Association="advanceNetModel.FK_Departments_Departments">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Department1" EntitySet="Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Departments" Association="advanceNetModel.FK_Students_Departments">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeptCourse_Students" Association="advanceNetModel.FK_DeptCourse_Students">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="DeptCourse" EntitySet="DeptCourses" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cours">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="DeptNo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Department" Relationship="advanceNetModel.FK_Courses_Departments" FromRole="Cours" ToRole="Department" />
+    <NavigationProperty Name="DeptCourses" Relationship="advanceNetModel.FK_DeptCourse_DeptCourse" FromRole="Cours" ToRole="DeptCourse" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Courses" Relationship="advanceNetModel.FK_Courses_Departments" FromRole="Department" ToRole="Cours" />
+    <NavigationProperty Name="Departments1" Relationship="advanceNetModel.FK_Departments_Departments" FromRole="Department" ToRole="Department1" />
+    <NavigationProperty Name="Department1" Relationship="advanceNetModel.FK_Departments_Departments" FromRole="Department1" ToRole="Department" />
+    <NavigationProperty Name="Students" Relationship="advanceNetModel.FK_Students_Departments" FromRole="Department" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="DeptCourse">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cid" Type="Int32" Nullable="false" />
+    <Property Name="Sid" Type="Int32" Nullable="false" />
+    <Property Name="Time" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Cours" Relationship="advanceNetModel.FK_DeptCourse_DeptCourse" FromRole="DeptCourse" ToRole="Cours" />
+    <NavigationProperty Name="Student" Relationship="advanceNetModel.FK_DeptCourse_Students" FromRole="DeptCourse" ToRole="Student" />
+  </EntityType>
+  <Association Name="FK_Courses_Departments">
+    <End Type="advanceNetModel.Department" Role="Department" Multiplicity="1" />
+    <End Type="advanceNetModel.Cours" Role="Cours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cours">
+        <PropertyRef Name="DeptNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeptCourse_DeptCourse">
+    <End Type="advanceNetModel.Cours" Role="Cours" Multiplicity="1" />
+    <End Type="advanceNetModel.DeptCourse" Role="DeptCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cours">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DeptCourse">
+        <PropertyRef Name="Cid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Departments_Departments">
+    <End Type="advanceNetModel.Department" Role="Department" Multiplicity="1" />
+    <End Type="advanceNetModel.Department" Role="Department1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Department1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_Departments">
+    <End Type="advanceNetModel.Department" Role="Department" Multiplicity="0..1" />
+    <End Type="advanceNetModel.Student" Role="Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="DeptNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeptCourse_Students">
+    <End Type="advanceNetModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="advanceNetModel.DeptCourse" Role="DeptCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DeptCourse">
+        <PropertyRef Name="Sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

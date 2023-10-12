@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_OuterLayout</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <a class="btn btn-primary" href="/View/Index">Home</a>
+    <a class="btn btn-primary" href="/View/Login">Login</a>
+    <a class="btn btn-primary" href="/View/SignUp">SignUp</a>
+
+    <div>
+        @RenderBody()
+    </div>
+    <div>
+        Copyright @@tri_gardening
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

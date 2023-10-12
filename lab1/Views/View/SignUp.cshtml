@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_OuterLayout.cshtml";
+}
+
+
+<div class="container">
+    <h2>SignUp</h2>
+    <p>
+       
+    </p>
+    <form action="" method="post">
+        Name: <input type="text" name="Name" placeholder="Name" value="@(Model==null ? "" : Model.Name)" class="form-control" />
+        <span class="text-danger">@Html.ValidationMessage("Name")</span>
+        <br />
+
+
+        Username: <input type="text" name="Username" placeholder="Username" value="@(Model==null ? "" : Model.Username)" class="form-control" />
+        <span class="text-danger">@Html.ValidationMessage("Username")</span>
+        <br />
+
+        Email: <input type="email" name="Email" placeholder="Email" value="@(Model==null ? "" : Model.Email)" class="form-control" />
+        <span class="text-danger">@Html.ValidationMessage("Email")</span>
+        <br />
+
+        Student ID: <input type="text" name="StudentID" placeholder="Student ID" value="@(Model==null ? "" : Model.DateOfBirth.ToString("yyyy-mm-dd"))" class="form-control" />
+        <span class="text-danger">@Html.ValidationMessage("StudentID")</span>
+        <br />
+        Password: <input type="password" name="Password" placeholder="Password" value="@(Model==null ? "" : Model.Password)" class="form-control" />
+        <span class="text-danger">@Html.ValidationMessage("Password")</span>
+        <br />
+
+
+        Date of Birth: <input type="date" name="DateOfBirth" value="@(Model==null ? "" : Model.DateOfBirth.ToString("yyyy-M-dd"))" class="form-control" />
+        <span class="text-danger">@Html.ValidationMessage("DateOfBirth")</span>
+        <br />
+
+        <input type="submit" value="Sign Up" class="btn btn-success" />
+    </form>
+
+</div>

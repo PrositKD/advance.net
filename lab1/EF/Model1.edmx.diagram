@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="547dfcf40aa64b57897ee99e0145b37a" Name="Diagram1" ZoomLevel="59">
+        <EntityTypeShape EntityType="advanceNetModel.Student" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="advanceNetModel.Cours" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="advanceNetModel.Department" Width="1.5" PointX="3.5" PointY="0.75" />
+        <EntityTypeShape EntityType="advanceNetModel.DeptCourse" Width="1.5" PointX="0.75" PointY="4.125" />
+        <AssociationConnector Association="advanceNetModel.FK_Courses_Departments" />
+        <AssociationConnector Association="advanceNetModel.FK_DeptCourse_DeptCourse" />
+        <AssociationConnector Association="advanceNetModel.FK_Departments_Departments" />
+        <AssociationConnector Association="advanceNetModel.FK_Students_Departments" />
+        <AssociationConnector Association="advanceNetModel.FK_DeptCourse_Students" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
